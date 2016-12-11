@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register --require babel-polyfill",
+    "test-watch": "./node_modules/mocha/bin/mocha --compilers js:babel-core/register --require babel-polyfill --watch",
     "dev": "nodemon api/index.js --watch api --exec babel-node",
     "build": "babel api --out-dir dist --source-maps",
     "start": "node dist/index.js",
@@ -14,7 +15,9 @@
   "license": "ISC",
   "dependencies": {
     "ali-oss": "^4.6.2",
+    "axios": "^0.15.3",
     "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
     "express": "^4.14.0",
     "jsonwebtoken": "^7.1.9",
     "lodash": "^4.17.2",
@@ -28,8 +31,10 @@
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-polyfill": "^6.20.0",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-stage-2": "^6.18.0",
+    "mocha": "^3.2.0",
     "nodemon": "^1.11.0"
   }
 }

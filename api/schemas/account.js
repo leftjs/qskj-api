@@ -62,4 +62,5 @@ const AccountSchema = new Schema({
 
 AccountSchema.set('toJSON', {})
 
+
 export const Account = mongoose.model('Account', AccountSchema)

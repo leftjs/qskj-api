@@ -63,18 +63,19 @@ function generateRoute() {
     let {
         // 公共
         address,
+        type, // person or company
+    
         // 个人
         name,
         // 公司
         companyName,
         licenseCode,
         fixPhone,
-        scanImage
-        
+        scanImage,
     } = req.body
     let id = req.params['id']
     try {
-      let result = await Account.update({_id: id}, {$set: {name, address, companyName, licenseCode, fixPhone, scanImage}})
+      let result = await Account.update({_id: id}, {$set: {name, address, companyName, licenseCode, fixPhone, scanImage, type}}, { runValidators: true })
       if (result.ok > 0) {
         res.json(await Account.findOne({_id: id}))
       }
