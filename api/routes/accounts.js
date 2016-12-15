@@ -6,7 +6,7 @@ import {sendMail} from '../utils/mailUtils'
 import {md5,getCaptcha} from '../utils/md5Utils'
 import {decodeTokenToAccount, signWithId} from '../utils/auth'
 import { Account } from '../schemas/account'
-
+import _ from 'lodash'
 function generateRoute() {
   const router = Router()
   
@@ -16,13 +16,13 @@ function generateRoute() {
    */
   router.post('/send/validation/mail', async (req, res, next) => {
     let {email, salt} = req.body
-    let md5Str = getCaptcha(email, salt)
+    let captcha = getCaptcha(email, salt)
     try {
       let result = await sendMail(email,
           '青霜科技注册绑定邮箱验证码邮件,请勿回复',
-          `<h1>亲爱的客户，您好！</h1><br><h3>您的绑定验证码是:</h3><p style="font-size: 20px; color: red;">${md5Str.substring(md5Str.length - 4)}</p><br><p>本邮件由系统自动发送，请勿直接回复！</p><p>感谢您的访问，祝您使用愉快！</p><br><p>青霜科技</p><p><a href="http://www.greenicetech.cn">www.greenicetech.cn</a></p>`
+          `<h1>亲爱的客户，您好！</h1><br><h3>您的绑定验证码是:</h3><p style="font-size: 20px; color: red;">${captcha}</p><br><p>本邮件由系统自动发送，请勿直接回复！</p><p>感谢您的访问，祝您使用愉快！</p><br><p>青霜科技</p><p><a href="http://www.greenicetech.cn">www.greenicetech.cn</a></p>`
       )
-      res.json(result)
+      res.json(_.merge({}, result, {salt}))
     }catch (err) {
       next(err)
     }

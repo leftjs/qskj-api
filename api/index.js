@@ -9,6 +9,9 @@ import routes from './routes'
 import mongoose from 'mongoose'
 import util from 'util'
 import _ from 'lodash'
+import cors from 'cors'
+
+
 /**
  * 全局log方法
  * @param obj
@@ -55,6 +58,7 @@ const app = express()
 const port = process.env.PORT || 3003
 
 app.use(logger('dev'))
+app.use(cors())
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(bodyParser.json())
 routes(app)

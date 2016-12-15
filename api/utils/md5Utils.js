@@ -8,6 +8,7 @@ export const md5 = (text) => {
 }
 
 export const getCaptcha = (str, salt) => {
-	const md5Str = `${str}${salt}`
-  return md5(md5Str).substring(md5Str.length - 4)
+	let preStr = `${str}${salt}`
+	let md5Str = md5(preStr)
+  return md5Str.substring(md5Str.length - 4)
 }

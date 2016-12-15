@@ -20,8 +20,13 @@ describe('test accounts', () => {
       email: 'leftjs@foxmail.com',
       salt: 'test'
     }).then((res) => {
-      //console.log(res.data)
+      
+      
+      console.log(res.data)
       res.data['accepted'].length.should.to.be.above(0)
+      res.data['salt'].should.not.be.null
+      
+      
       //return res
     })
   })
